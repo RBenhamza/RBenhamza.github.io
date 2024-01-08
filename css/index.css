@@ -76,12 +76,11 @@ body {
 
 .project-description {
     padding: 10px; /* Espacement intérieur */
-    text-align: center; /* Centrage du texte */
+    text-align: center; /* Centrage du texte */https://rbenhamza.github.io/index.html
 }
 .feature-thumbnail {
     background-position: center;
     width: 600px; /* Largeur complète */
-    height: 350px; /* Hauteur fixe pour les miniatures */
     background-size: cover; /* S'assure que l'image couvre toute la zone */
     border-bottom: 1px solid #ddd; /* Ligne de séparation */
 }
