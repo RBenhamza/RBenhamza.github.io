@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Benhamza Romain</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body>
+
+    <header style="background-image: linear-gradient(to bottom, #153935, #1D4E50); display: flex; align-items: center; justify-content: center; padding: 10px;">
+        <a id="logo" href="index.html">
+            <img src='https://avatars.githubusercontent.com/u/58343255?v=4' height="80px"/>
+        </a>
+        
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <h1>Benhamza Romain</h1>
+            <nav style="align-self: center;">
+                <!-- Liens de menu ici -->
+                <a href="/index.html">Home</a>
+                <a href="/projects.html">Projects</a>
+                <a href="#">Resume</a>
+                <!-- Ajoutez d'autres liens de menu si nécessaire -->
+            </nav>
+        </div>
+    </header>
+    <div class="section">
+        <h2>Why creating the youtube clipper ?</h2>
+        <p> I've seen many youtube clippers online but all of them were either missing something, either too long/too complex to use or needed an account. I wanted to make a simple clipper with just the 3 needed infos</p>
+    </div>
+    <div class="section">
+        <h2>How does it work ?</h2>
+        <p>The clipper uses the pytube library to download the video from youtube, and the moviepy library cuts with the given timecodes.</p>
+    </div>
+    <div class="section">
+        <h2>Demonstration</h2>
+        <div class="grid-container">
+        <div class="grid-item">
+            <div class="feature-thumbnail" style="background-image: url('ytclipper/clipper-demonstrate.gif');"></div>
+            <div class="feature-description">
+                <h3>Clip on terminal & on discord</h3>
+                <p>Logan is mainly used to stop some bots and restart others (Restarting a bot stops it, update it from git and rerun it)</p>
+            </div>
+        </div>
+        </div>
+        <div class="section">
+           
+            <a class='button'href="ytclipper/ytclipper.py"><img src="img/python.png" height="30px"/><p style='margin-top: -10'>Link to the script</p></a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© Benhamza Romain - Cara</p>
+    </div>
+
+</body>
+</html>

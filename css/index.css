@@ -1,0 +1,109 @@
+header {
+    /*background-color: #202225; v1*/
+    background-color: #0D1014;
+    display: flex;
+    vertical-align: center;
+    height: 150px;
+    color:white;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(29, 32, 32);
+    color: #173f3b;
+}
+.header, .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+.grid-item {
+    padding: 20px;
+    text-align: center;
+}
+
+.section {
+    background-color:#d3e4e6;; /* Slightly darker than the page background */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Inner spacing */
+    margin: 20px 0; /* Outer spacing */
+    font-size: 14px; /* Font size */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* Optional: Adjust the line height for better readability */
+.section p {
+    line-height: 1.6;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes de même largeur */
+    gap: 20px; /* Espace entre les éléments */
+    padding: 20px; /* Espacement autour de la grille */
+}
+
+.grid-item {
+    background-color: #9fbec0; /* Couleur de fond */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+    overflow: hidden; /* Garde tout à l'intérieur des coins arrondis */
+    transition: transform 0.3s ease-in-out; /* Effet de transition au survol */
+    display: flex; /* Utiliser Flexbox */
+    flex-direction: column; /* Organiser les enfants verticalement */
+    justify-content: center; /* Centrer horizontalement dans Flexbox */
+    align-items: center; /* Centrer verticalement dans Flexbox */
+}
+
+.grid-item:hover {
+    transform: scale(1.05); /* Agrandit légèrement l'élément au survol */
+}
+
+.project-thumbnail {
+    background-position: center;
+    width: 200px; /* Largeur complète */
+    height: 200px; /* Hauteur fixe pour les miniatures */
+    background-size: cover; /* S'assure que l'image couvre toute la zone */
+    border-bottom: 1px solid #ddd; /* Ligne de séparation */
+}
+
+.project-description {
+    padding: 10px; /* Espacement intérieur */
+    text-align: center; /* Centrage du texte */
+}
+.feature-thumbnail {
+    background-position: center;
+    width: 600px; /* Largeur complète */
+    height: 350px; /* Hauteur fixe pour les miniatures */
+    background-size: cover; /* S'assure que l'image couvre toute la zone */
+    border-bottom: 1px solid #ddd; /* Ligne de séparation */
+}
+
+.feature-description {
+    padding: 10px; /* Espacement intérieur */
+    text-align: center; /* Centrage du texte */
+}
+
+nav a{
+    color:#91D0BF;
+    font-size: 16px;
+}
+.button {
+    background-color: #225E57; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    vertical-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+  }
