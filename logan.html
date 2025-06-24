@@ -1,64 +1,230 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Benhamza Romain</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benhamza Romain - Logan</title>
+    <!-- Chargement de la police Inter depuis Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Chargement de Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuration de Tailwind pour les couleurs personnalisées et le mode sombre */
+        :root {
+            --color-bg-dark: #0A0A0A; /* Presque noir */
+            --color-bg-light-dark: #1A1A1A; /* Gris très foncé */
+            --color-text-light: #E0E0E0; /* Gris très clair pour le texte */
+            --color-text-muted: #A0A0A0; /* Gris moyen pour les textes secondaires */
+            --color-accent-teal: #00ADB5; /* Bleu sarcelle principal */
+            --color-accent-blue: #0077B6; /* Bleu secondaire */
+            --color-gradient-start: #0F172A; /* Slate 900 */
+            --color-gradient-end: #020617; /* Slate 950 */
+        }
+
+        /* Styles globaux pour la police et le défilement */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background: var(--color-bg-dark); /* Couleur de fond par défaut */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+            position: relative; /* Pour positionner les éléments de fond animés */
+            color: var(--color-text-light);
+        }
+
+        /* Animation de fond complexe avec des "bulles" lumineuses */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,173,181,0.2) 0%, rgba(0,173,181,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(100px);
+        }
+
+        body::before {
+            top: 5%;
+            left: 5%;
+            animation: moveBubble1 20s infinite alternate ease-in-out;
+        }
+
+        body::after {
+            bottom: 5%;
+            right: 5%;
+            animation: moveBubble2 25s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes moveBubble1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 150px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes moveBubble2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, -120px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Masque les barres de défilement */
+        ::-webkit-scrollbar { display: none; }
+        html { scrollbar-width: none; }
+
+        /* Effet de brillance pour les cartes de projet au survol (non utilisé ici directement, mais conservé pour cohérence si d'autres éléments l'utilisaient) */
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            transition: left 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .shine-effect:hover::before {
+            left: 150%;
+        }
+        .shine-effect:hover {
+            box-shadow: 0 0 30px rgba(0, 173, 181, 0.5);
+        }
+
+        /* Effet de bordure néon au survol des sections */
+        .neon-border-hover {
+            transition: box-shadow 0.4s ease-in-out, border-color 0.4s ease-in-out;
+        }
+        .neon-border-hover:hover {
+            box-shadow: 0 0 25px rgba(0, 173, 181, 0.8), inset 0 0 10px rgba(0, 173, 181, 0.4);
+            border-color: var(--color-accent-teal);
+        }
+
+        /* Animation de pulsation pour le titre */
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 5px rgba(0,173,181,0.5), 0 0 10px rgba(0,173,181,0.3); }
+            50% { text-shadow: 0 0 15px rgba(0,173,181,0.9), 0 0 25px rgba(0,173,181,0.6); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        /* Styles spécifiques pour les images de démonstration */
+        .demo-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1.5rem; /* rounded-3xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15); /* shadow-xl */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .demo-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
-<body>
+<body class="text-gray-200">
 
-    <header style="background-image: linear-gradient(to bottom, #153935, #1D4E50); display: flex; align-items: center; justify-content: center; padding: 10px;">
-        <a id="logo" href="index.html">
-            <img src='https://avatars.githubusercontent.com/u/58343255?v=4' height="80px"/>
-        </a>
-        
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <h1>Benhamza Romain</h1>
-            <nav style="align-self: center;">
-                <!-- Liens du menu ici -->
-                <a href="/index.html">Accueil</a>
-                <a href="/projects.html">Projets</a>
-                <a href="cv.pdf">CV</a>
-                <!-- Ajoutez d'autres liens du menu si nécessaire -->
-            </nav>
+    <!-- Section d'en-tête -->
+    <header class="relative bg-gradient-to-br from-gray-900 to-gray-950 text-white shadow-2xl p-4 md:p-6 rounded-b-3xl flex flex-col md:flex-row items-center justify-between mx-auto max-w-full lg:max-w-7xl border-b-4 border-teal-700 backdrop-blur-sm bg-opacity-80 z-20">
+        <!-- Conteneur du logo et du titre -->
+        <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4 mb-4 md:mb-0">
+            <a id="logo" href="index.html" class="flex-shrink-0 group">
+                <img src='https://avatars.githubusercontent.com/u/58343255?v=4' alt="Photo de profil de Benhamza Romain" class="h-24 w-24 rounded-full border-4 border-teal-500 shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:shadow-3xl ring-4 ring-teal-700 ring-opacity-50 group-hover:ring-teal-400 group-hover:ring-opacity-80"/>
+            </a>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-center md:text-left text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 animate-pulse-glow">Benhamza Romain</h1>
         </div>
+        <!-- Barre de navigation -->
+        <nav class="flex flex-wrap justify-center md:justify-end gap-4 text-xl font-medium">
+            <a href="index.html" class="relative px-5 py-2 rounded-full bg-gray-800 bg-opacity-70 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600 hover:text-white transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg border border-gray-700 hover:border-teal-500 overflow-hidden group">
+                <span class="relative z-10">Accueil</span>
+                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+            </a>
+            <a href="projects.html" class="relative px-5 py-2 rounded-full bg-gray-800 bg-opacity-70 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600 hover:text-white transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg border border-gray-700 hover:border-teal-500 overflow-hidden group">
+                <span class="relative z-10">Projets</span>
+                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+            </a>
+            <a href="cv.pdf" target="_blank" class="relative px-5 py-2 rounded-full bg-gray-800 bg-opacity-70 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600 hover:text-white transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg border border-gray-700 hover:border-teal-500 overflow-hidden group">
+                <span class="relative z-10">CV</span>
+                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+            </a>
+        </nav>
     </header>
-    <div class="section">
-        <h2>Qu'est-ce que Logan ?</h2>
-        <p>Mes amis et moi avons hébergé plusieurs bots sur un serveur commun que nous possédons, pour nous aider à interagir avec tous ces bots, j'ai créé "Logan", un seul bot programmé en Python agissant comme un outil de gestion et d'interaction pour d'autres bots (programmés en JavaScript et en Python) s'exécutant sur un serveur.</p>
-    </div>
-    <div class="section">
-        <h2>Comment ça fonctionne ?</h2>
-        <p>Logan a une liste d'identifiants Discord qui sont essentiellement des administrateurs qui peuvent l'utiliser, il utilise principalement la fonction os.system en Python pour exécuter des commandes shell. Il utilise également des sessions "screen" pour l'aider à gérer les bots.</p>
-        <p>Par exemple, pour redémarrer un bot, Logan fait :</p>
-        <ul>
-            <li>Recherche une session "screen" avec le nom du bot comme nom</li>
-            <li>Termine les sessions</li>
-            <li>Crée une nouvelle session avec le nom du bot comme nom et l'ordre de mettre à jour le dépôt du bot et de le relancer</li>
-        </ul>
-    </div>
-    <div class="section">
-        <h2>Démonstration</h2>
-        <div class="grid-container">
-        <div class="grid-item">
-            <a href='logan/logan-demonstrate.gif'><img src="logan/logan-demonstrate.gif" width="500px"/></a>
-            <div class="feature-description">
-                <img source="img/python.png" size="20px"><h3>Gestion des bots</h3>
-                <p>Logan est principalement utilisé pour arrêter certains bots et redémarrer d'autres (le redémarrage d'un bot l'arrête, le met à jour depuis Git et le relance)</p>
-            </div>
-        </div>
-        <div class="grid-item">
-            <a href='logan/logan-demonstrate2.gif'><img src="logan/logan-demonstrate2.gif" width="500px"/></a>
-            <div class="feature-description">
-                <h3>Commandes serveur</h3>
-                <p>Logan est également capable d'exécuter directement des commandes shell, ce qui est utile pour le débogage rapide ou lorsque je ne peux pas accéder directement au serveur.</p>
-            </div>
-        </div>
-        </div>
-    </div>
 
-    <div class="footer">
-        <p>© Benhamza Romain - Cara</p>
-    </div>
+    <main class="container mx-auto px-4 py-12 lg:py-16 max-w-full lg:max-w-7xl relative z-10">
+        <!-- Section Qu'est-ce que Logan ? -->
+        <section class="bg-gray-900 p-8 md:p-10 rounded-3xl shadow-3xl mb-12 md:mb-20 border border-teal-700 transform transition-transform duration-500 hover:scale-[1.01] neon-border-hover backdrop-blur-md bg-opacity-70 relative">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-8 text-center drop-shadow-lg animate-pulse-glow">Qu'est-ce que Logan ?</h2>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-300 text-center max-w-4xl mx-auto font-light">
+                Mes amis et moi avons hébergé plusieurs bots sur un serveur commun que nous possédons, pour nous aider à interagir avec tous ces bots, j'ai créé "Logan", un seul bot programmé en Python agissant comme un outil de gestion et d'interaction pour d'autres bots (programmés en JavaScript et en Python) s'exécutant sur un serveur.
+            </p>
+        </section>
+
+        <!-- Section Comment ça fonctionne ? -->
+        <section class="bg-gray-900 p-8 md:p-10 rounded-3xl shadow-3xl mb-12 md:mb-20 border border-teal-700 transform transition-transform duration-500 hover:scale-[1.01] neon-border-hover backdrop-blur-md bg-opacity-70 relative">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-8 text-center drop-shadow-lg animate-pulse-glow">Comment ça fonctionne ?</h2>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-300 text-center max-w-4xl mx-auto font-light mb-4">
+                Logan a une liste d'identifiants Discord qui sont essentiellement des administrateurs qui peuvent l'utiliser, il utilise principalement la fonction `os.system` en Python pour exécuter des commandes shell. Il utilise également des sessions "screen" pour l'aider à gérer les bots.
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-300 text-center max-w-4xl mx-auto font-light mb-4">
+                Par exemple, pour redémarrer un bot, Logan fait :
+            </p>
+            <ul class="list-disc list-inside text-lg md:text-xl leading-relaxed text-gray-300 mx-auto max-w-4xl font-light space-y-2">
+                <li>Recherche une session "screen" avec le nom du bot comme nom</li>
+                <li>Termine les sessions</li>
+                <li>Crée une nouvelle session avec le nom du bot comme nom et l'ordre de mettre à jour le dépôt du bot et de le relancer</li>
+            </ul>
+        </section>
+
+        <!-- Section Démonstration -->
+        <section class="bg-gray-900 p-8 md:p-10 rounded-3xl shadow-3xl mb-12 md:mb-20 border border-teal-700 transform transition-transform duration-500 hover:scale-[1.01] neon-border-hover backdrop-blur-md bg-opacity-70 relative">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-10 text-center drop-shadow-lg animate-pulse-glow">Démonstration</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Démonstration 1: Gestion des bots -->
+                <div class="flex flex-col items-center p-4 bg-gray-800 rounded-3xl shadow-xl border border-gray-700 hover:scale-102 transition-transform duration-300">
+                    <a href='logan/logan-demonstrate.gif' target="_blank" rel="noopener noreferrer">
+                        <img src="logan/logan-demonstrate.gif" alt="Démonstration Gestion des bots" class="demo-image w-full"/>
+                    </a>
+                    <div class="feature-description text-center mt-6">
+                        <div class="flex items-center justify-center mb-3">
+                            <img src="img/python.png" alt="Icône Python" class="h-8 w-8 mr-3 filter brightness-125"/>
+                            <h3 class="text-2xl font-bold text-teal-400">Gestion des bots</h3>
+                        </div>
+                        <p class="text-gray-400 leading-snug text-base font-light">
+                            Logan est principalement utilisé pour arrêter certains bots et redémarrer d'autres (le redémarrage d'un bot l'arrête, le met à jour depuis Git et le relance).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Démonstration 2: Commandes serveur -->
+                <div class="flex flex-col items-center p-4 bg-gray-800 rounded-3xl shadow-xl border border-gray-700 hover:scale-102 transition-transform duration-300">
+                    <a href='logan/logan-demonstrate2.gif' target="_blank" rel="noopener noreferrer">
+                        <img src="logan/logan-demonstrate2.gif" alt="Démonstration Commandes serveur" class="demo-image w-full"/>
+                    </a>
+                    <div class="feature-description text-center mt-6">
+                        <div class="flex items-center justify-center mb-3">
+                            <!-- Icône de terminal/console, ou un logo approprié si disponible -->
+                            <svg class="h-8 w-8 mr-3 text-teal-400 filter drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <h3 class="text-2xl font-bold text-teal-400">Commandes serveur</h3>
+                        </div>
+                        <p class="text-gray-400 leading-snug text-base font-light">
+                            Logan est également capable d'exécuter directement des commandes shell, ce qui est utile pour le débogage rapide ou lorsque je ne peux pas accéder directement au serveur.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-950 text-gray-500 text-center p-8 rounded-t-3xl shadow-inner max-w-full lg:max-w-7xl mx-auto border-t-4 border-teal-900 backdrop-blur-sm bg-opacity-70 z-20">
+        <p class="text-sm md:text-base font-light">&copy; 2025 Benhamza Romain - Cara. Tous droits réservés.</p>
+    </footer>
 
 </body>
 </html>

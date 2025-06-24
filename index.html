@@ -1,73 +1,238 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Benhamza Romain</title>
-    <link rel="stylesheet" type="text/css" href="./css/index.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benhamza Romain - Portfolio</title>
+    <!-- Chargement de la police Inter depuis Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Chargement de Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuration de Tailwind pour les couleurs personnalisées et le mode sombre */
+        :root {
+            --color-bg-dark: #0A0A0A; /* Presque noir */
+            --color-bg-light-dark: #1A1A1A; /* Gris très foncé */
+            --color-text-light: #E0E0E0; /* Gris très clair pour le texte */
+            --color-text-muted: #A0A0A0; /* Gris moyen pour les textes secondaires */
+            --color-accent-teal: #00ADB5; /* Bleu sarcelle principal */
+            --color-accent-blue: #0077B6; /* Bleu secondaire */
+            --color-gradient-start: #0F172A; /* Slate 900 */
+            --color-gradient-end: #020617; /* Slate 950 */
+        }
+
+        /* Styles globaux pour la police et le défilement */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background: var(--color-bg-dark); /* Couleur de fond par défaut */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+            position: relative; /* Pour positionner les éléments de fond animés */
+            color: var(--color-text-light);
+        }
+
+        /* Animation de fond complexe avec des "bulles" lumineuses */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,173,181,0.2) 0%, rgba(0,173,181,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(100px);
+        }
+
+        body::before {
+            top: 5%;
+            left: 5%;
+            animation: moveBubble1 20s infinite alternate ease-in-out;
+        }
+
+        body::after {
+            bottom: 5%;
+            right: 5%;
+            animation: moveBubble2 25s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes moveBubble1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 150px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes moveBubble2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, -120px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Masque les barres de défilement */
+        ::-webkit-scrollbar { display: none; }
+        html { scrollbar-width: none; }
+
+        /* Effet de brillance pour les cartes de projet au survol */
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%; /* Commencer plus loin */
+            width: 70%; /* Plus large */
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            transition: left 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .shine-effect:hover::before {
+            left: 150%;
+        }
+        .shine-effect:hover {
+            box-shadow: 0 0 30px rgba(0, 173, 181, 0.5); /* Ombre plus prononcée */
+        }
+
+        /* Effet de bordure néon au survol des sections */
+        .neon-border-hover {
+            transition: box-shadow 0.4s ease-in-out, border-color 0.4s ease-in-out;
+        }
+        .neon-border-hover:hover {
+            box-shadow: 0 0 25px rgba(0, 173, 181, 0.8), inset 0 0 10px rgba(0, 173, 181, 0.4);
+            border-color: var(--color-accent-teal);
+        }
+
+        /* Style pour les images de projet (pour remplacer les placehold.co) */
+        .project-thumbnail {
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animation de pulsation pour le titre */
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 5px rgba(0,173,181,0.5), 0 0 10px rgba(0,173,181,0.3); }
+            50% { text-shadow: 0 0 15px rgba(0,173,181,0.9), 0 0 25px rgba(0,173,181,0.6); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 3s infinite alternate;
+        }
+    </style>
 </head>
-<body>
+<body class="text-gray-200">
 
-    <header style="background-image: linear-gradient(to bottom, #153935, #1D4E50); display: flex; align-items: center; justify-content: center; padding: 10px;">
-        <a id="logo" href="index.html">
-            <img src='https://avatars.githubusercontent.com/u/58343255?v=4' height="80px"/>
-        </a>
-        
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <h1>Benhamza Romain</h1>
-            <nav style="align-self: center;">
-                <!-- Liens du menu ici -->
-                <a href="/index.html">Accueil</a>
-                <a href="/projects.html">Projets</a>
-                <a href="cv.pdf">CV</a>
-                <!-- Ajoutez d'autres liens du menu si nécessaire -->
-            </nav>
+    <!-- Section d'en-tête -->
+    <header class="relative bg-gradient-to-br from-gray-900 to-gray-950 text-white shadow-2xl p-4 md:p-6 rounded-b-3xl flex flex-col md:flex-row items-center justify-between mx-auto max-w-full lg:max-w-7xl border-b-4 border-teal-700 backdrop-blur-sm bg-opacity-80 z-20">
+        <!-- Conteneur du logo et du titre -->
+        <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4 mb-4 md:mb-0">
+            <a id="logo" href="index.html" class="flex-shrink-0 group">
+                <img src='https://avatars.githubusercontent.com/u/58343255?v=4' alt="Photo de profil de Benhamza Romain" class="h-24 w-24 rounded-full border-4 border-teal-500 shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:shadow-3xl ring-4 ring-teal-700 ring-opacity-50 group-hover:ring-teal-400 group-hover:ring-opacity-80"/>
+            </a>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-center md:text-left text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 animate-pulse-glow">Benhamza Romain</h1>
         </div>
+        <!-- Barre de navigation -->
+        <nav class="flex flex-wrap justify-center md:justify-end gap-4 text-xl font-medium">
+            <a href="#about" class="relative px-5 py-2 rounded-full bg-gray-800 bg-opacity-70 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600 hover:text-white transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg border border-gray-700 hover:border-teal-500 overflow-hidden group">
+                <span class="relative z-10">À propos</span>
+                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+            </a>
+            <a href="#portfolio" class="relative px-5 py-2 rounded-full bg-gray-800 bg-opacity-70 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600 hover:text-white transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg border border-gray-700 hover:border-teal-500 overflow-hidden group">
+                <span class="relative z-10">Projets</span>
+                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+            </a>
+            <a href="cv.pdf" target="_blank" class="relative px-5 py-2 rounded-full bg-gray-800 bg-opacity-70 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600 hover:text-white transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg border border-gray-700 hover:border-teal-500 overflow-hidden group">
+                <span class="relative z-10">CV</span>
+                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+            </a>
+        </nav>
     </header>
-    
 
-    <div class="section" id="about">
-        <h2>À propos de moi</h2>
-        <p>Je suis un développeur français dévoué, ayant perfectionné mes compétences en informatique pendant trois années d'études et une année de développement professionnel.
-             Passionné par l'apprentissage continu, je suis toujours à la recherche de nouveaux défis et d'opportunités pour élargir mon répertoire technique. Enthousiaste de l'IA et amateur de Python.</p>
-    </div>
+    <main class="container mx-auto px-4 py-12 lg:py-16 max-w-full lg:max-w-7xl relative z-10">
+        <!-- Section À propos de moi -->
+        <section id="about" class="bg-gray-900 p-8 md:p-10 rounded-3xl shadow-3xl mb-12 md:mb-20 border border-teal-700 transform transition-transform duration-500 hover:scale-[1.01] neon-border-hover backdrop-blur-md bg-opacity-70 relative">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-8 text-center drop-shadow-lg animate-pulse-glow">À propos de moi</h2>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-300 text-center max-w-4xl mx-auto font-light">
+                Je suis un développeur français dévoué, ayant perfectionné mes compétences en informatique pendant trois années d'études et une année de développement professionnel.
+                Passionné par l'apprentissage continu, je suis toujours à la recherche de nouveaux défis et d'opportunités pour élargir mon répertoire technique. Enthousiaste de l'IA et amateur de Python.
+            </p>
+        </section>
 
-    <div class="section" id="portfolio">
-        <h2>Mes Projets</h2>
-        <div class="grid-container">
-        <div class="grid-item" onclick="window.location='logan.html'">
-            <div class="project-thumbnail" style="background-image: url('img/logan.png');"></div>
-            <div class="project-description">
-                <img src="img/python.png" height="30px"/><h3>Logan - Gestionnaire de bot Discord</h3>
-                <p>"Logan" est un bot polyvalent et avancé conçu pour Discord, fonctionnant principalement comme un outil de gestion et d'interaction pour d'autres bots s'exécutant sur un serveur. Il est équipé de capacités pour mettre à jour à distance depuis Git, redémarrer et arrêter ces bots.</p>
+        <!-- Section Mes Projets -->
+        <section id="portfolio" class="bg-gray-900 p-8 md:p-10 rounded-3xl shadow-3xl mb-12 md:mb-20 border border-teal-700 transform transition-transform duration-500 hover:scale-[1.01] neon-border-hover backdrop-blur-md bg-opacity-70 relative">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-10 text-center drop-shadow-lg animate-pulse-glow">Mes Projets</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Projet Logan -->
+                <div class="relative bg-gray-800 rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer border border-gray-700 shine-effect group" onclick="window.location='logan.html'">
+                    <div class="w-full h-48 project-thumbnail" style="background-image: url('https://placehold.co/600x400/153935/98d8c9?text=Logan+-+Discord+Bot');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <!-- Logo Discord -->
+                            <img src="https://upload.wikimedia.org/wikipedia/fr/4/4e/Discord_logo.png" alt="Logo Discord" class="h-9 w-9 mr-3 filter drop-shadow-lg rounded-full"/>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Icône Python" class="h-9 w-9 mr-3 filter drop-shadow-lg"/>
+                            <h3 class="text-2xl font-bold text-teal-400 group-hover:text-teal-300 transition-colors duration-300">Logan - Gestionnaire de bot Discord</h3>
+                        </div>
+                        <p class="text-gray-400 leading-snug text-base font-light">
+                            "Logan" est un bot polyvalent et avancé conçu pour Discord, fonctionnant principalement comme un outil de gestion et d'interaction pour d'autres bots s'exécutant sur un serveur. Il est équipé de capacités pour mettre à jour à distance depuis Git, redémarrer et arrêter ces bots.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Projet Calculateur de ligne de vue -->
+                <div class="relative bg-gray-800 rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer border border-gray-700 shine-effect group" onclick="window.location='insight.html'">
+                    <div class="w-full h-48 project-thumbnail" style="background-image: url('https://placehold.co/600x400/1D4E50/98d8c9?text=Calculateur+Ligne+de+Vue');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <!-- Icône de ligne de vue générique (alternative aux images externes) -->
+                            <svg class="h-9 w-9 mr-3 text-teal-400 filter drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Icône Python" class="h-9 w-9 mr-3 filter drop-shadow-lg"/>
+                            <h3 class="text-2xl font-bold text-teal-400 group-hover:text-teal-300 transition-colors duration-300">Calculateur de ligne de vue</h3>
+                        </div>
+                        <p class="text-gray-400 leading-snug text-base font-light">
+                            Un projet qui calcule où vous pouvez 'voir' sur un tableau 2D avec des obstacles qui vous bloquent.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Projet Youtube Clipper -->
+                <div class="relative bg-gray-800 rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer border border-gray-700 shine-effect group" onclick="window.location='ytclipper.html'">
+                    <div class="w-full h-48 project-thumbnail" style="background-image: url('https://placehold.co/600x400/1B263B/98d8c9?text=YouTube+Clipper');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <!-- Logo YouTube -->
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_of_YouTube_%282015-2017%29.svg" alt="Logo YouTube" class="h-9 w-9 mr-3 filter drop-shadow-lg"/>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Icône Python" class="h-9 w-9 mr-3 filter drop-shadow-lg"/>
+                            <h3 class="text-2xl font-bold text-teal-400 group-hover:text-teal-300 transition-colors duration-300">Youtube Clipper</h3>
+                        </div>
+                        <p class="text-gray-400 leading-snug text-base font-light">
+                            Un simple script qui crée un extrait vidéo à partir d'une vidéo YouTube et de deux codes de temps. Il fonctionne seul mais est également intégré à un bot Discord.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="grid-item" onclick="window.location='insight.html'">
-            <div class="project-thumbnail" style="background-image: url('img/ldv.png');"></div>
-            <div class="project-description">
-                <img src="img/python.png" height="30px"/>
-                <h3>Calculateur dede ligne de vue</h3>
-                <p>Un projet qui calcule où vous pouvez 'voir' sur un tableau 2D avec des obstacles qui vous bloquent.</p>
+            <div class="text-center mt-12">
+                <a href="/projects" class="inline-block bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white font-extrabold py-4 px-10 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 border border-teal-400 tracking-wider text-lg">
+                    Voir Plus de Projets
+                </a>
             </div>
-        </div>
-        <div class="grid-item" onclick="window.location='ytclipper.html'">
-            <div class="project-thumbnail" style="background-image: url('img/ytclipper.png');"></div>
-            <div class="project-description">
-                <img src="img/python.png" height="30px"/>
-                <h3>Youtube clipper</h3>
-                <p>Un simple script qui crée un extrait vidéo à partir d'une vidéo YouTube et de deux codes de temps. Il fonctionne seul mais est également intégré à un bot Discord.</p>
-            </div>
-        </div>
-        </div>
-        <a class='button' href="/projects">Voir Plus</a>
-    </div>
+        </section>
 
-    <div class="section" id="contact">
-        <h2>Contactez-moi</h2>
-        <p>Email : benhamzaromain@gmail.com</p>
-    </div>
+        <!-- Section Contactez-moi -->
+        <section id="contact" class="bg-gray-900 p-8 md:p-10 rounded-3xl shadow-3xl mb-12 md:mb-20 border border-teal-700 transform transition-transform duration-500 hover:scale-[1.01] neon-border-hover backdrop-blur-md bg-opacity-70 relative">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-8 text-center drop-shadow-lg animate-pulse-glow">Contactez-moi</h2>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-300 text-center font-light">
+                Email : <a href="mailto:benhamzaromain@gmail.com" class="text-teal-400 hover:underline hover:text-teal-300 transition-colors duration-200">benhamzaromain@gmail.com</a>
+            </p>
+        </section>
+    </main>
 
-    <div class="footer">
-        <p>© Benhamza Romain - Cara</p>
-    </div>
+    <!-- Pied de page -->
+    <footer class="bg-gray-950 text-gray-500 text-center p-8 rounded-t-3xl shadow-inner max-w-full lg:max-w-7xl mx-auto border-t-4 border-teal-900 backdrop-blur-sm bg-opacity-70 z-20">
+        <p class="text-sm md:text-base font-light">&copy; 2025 Benhamza Romain - Cara. Tous droits réservés.</p>
+    </footer>
 
 </body>
 </html>
